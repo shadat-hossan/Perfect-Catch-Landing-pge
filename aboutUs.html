@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About Us || Perfect Catch</title>
+    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|Oxygen:700" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/style.css">
+    <script src="https://unpkg.com/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
+    <link rel="shortcut icon" href="./dist//images//perfect catch main logo.png" type="image/x-icon" />
+    <meta name="google-site-verification" content="IN9N7xgrbVQ-IHOqmTqhyLy6r6c_HiaVsj0tbM5E8HA" />
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WM6F576D');</script>
+    <!-- End Google Tag Manager -->
+</head>
+<body class="is-boxed has-animations">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WM6F576D"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="body-wrap boxed-container">
+        <header class="site-header text-light">
+            <div class="container">
+                <div class="site-header-inner">
+                    <div class="brand header-brand">
+                        <h1 class="m-0">
+                            <a href="#">
+                                <img class="header-logo-image" src="dist/images/perfect catch main logo.png" alt="Logo" style="width: 60px;">
+                            </a>
+                        </h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- About Us Section -->
+        <main>
+            <section class="hero text-light" style="background-color: #0B0D19;">
+                <div class="hero-bg"></div>
+                <div class="container-sm">
+                    <div class="">
+                        <div class="hero-copy">
+                            <h1 class="hero-title mt-0">Perfect Catch About us</h1>
+                            <div id="about-us">
+                                Loading About us...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+ 
+    </div>
+
+    <script src="dist/js/main.min.js"></script>
+    <script>
+        // Fetch the About Us content from the API
+        fetch("https://api.perfectcatchdating.com/api/v1/info/about-us")
+        .then((response) => {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.json();
+        })
+        .then((data) => {
+            const encodedHtml = data?.data?.attributes?.[0]?.content;
+            console.log("Fetched About Us content:", data);
+            if (encodedHtml) {
+                const textarea = document.createElement("textarea");
+                textarea.innerHTML = encodedHtml; // decode entities
+                document.getElementById("about-us").innerHTML = textarea.value;
+            } else {
+                throw new Error("About Us content not found.");
+            }
+        })
+        .catch((error) => {
+            document.getElementById("about-us").innerHTML =
+                "<p>Failed to load About us. Please try again later.</p>";
+            console.error("Fetch error:", error);
+        });
+    </script>
+</body>
+</html>
